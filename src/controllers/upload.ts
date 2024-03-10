@@ -12,14 +12,18 @@ interface CompilationResult {
 }
 
 const extractAndProcessZip = async (zipFileName: string): Promise<CompilationResult[]> => {
-  let actualFilePath = zipFileName.replace(".zip", "");
+  let actualFilePath="";
 
   if (!zipFileName) {
      throw new ZipNotFoundError("No zip file found.");
     return [];
   }
 
-  const unzipFolderPath = path.join(process.cwd(), actualFilePath);
+  const unzipFolderPath = path.join(
+    process.cwd(),
+    zipFileName.replace(".zip", "")
+  );
+
 
   const extractZip = (zipFileName: string, unzipFolderPath: string): void => {
     const zip = new AdmZip(zipFileName);
@@ -84,6 +88,10 @@ const extractAndProcessZip = async (zipFileName: string): Promise<CompilationRes
 
   if (!fs.existsSync(unzipFolderPath)) {
     extractZip(zipFileName, unzipFolderPath);
+    const contents = fs.readdirSync(unzipFolderPath);
+    if (contents.length === 1) {
+      actualFilePath = contents[0];
+    }
   } else {
     console.log("Folder already exists");
   }
