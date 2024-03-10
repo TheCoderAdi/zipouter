@@ -8,7 +8,7 @@
   "scripts": {
     "build": "npx rollup -c"
   },
-  "keywords": [ 
+  "keywords": [
     "npm",
     "zip",
     "extract",
@@ -17,7 +17,8 @@
     "java",
     "javascript",
     "python",
-    "programming languages"],
+    "programming languages"
+  ],
   "author": "Aditya SwayamSiddha",
   "license": "MIT",
   "devDependencies": {
@@ -32,6 +33,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TheCoderAdi/zipouter"
+    "url": "https://github.com/TheCoderAdi/zipouter.git"
   }
 }
