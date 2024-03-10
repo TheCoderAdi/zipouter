@@ -10,7 +10,7 @@ export default defineConfig({
       name: "zipouter",
     },
   ],
-  external: ["adm-zip"],
+  external: ["adm-zip", "fs", "path", "child_process", "util"],
   plugins: [
     typescript({
       tsconfig: "tsconfig.json",
