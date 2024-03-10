@@ -29,5 +29,9 @@
     "rollup": "^4.12.1",
     "rollup-plugin-polyfill-node": "^0.13.0",
     "tslib": "^2.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheCoderAdi/zipouter"
   }
 }
