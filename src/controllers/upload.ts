@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import AdmZip from "adm-zip";
-import {exec} from "child_process";
+import { exec } from "child_process";
 import path from "path";
 import { promisify } from "util";
 
@@ -11,19 +11,17 @@ interface CompilationResult {
   output: string;
 }
 
-const extractAndProcessZip = async (zipFileName: string): Promise<CompilationResult[]> => {
-  let actualFilePath="";
+const extractAndProcessZip = async (
+  zipFileName: string
+): Promise<CompilationResult[]> => {
+  let actualFilePath = "";
 
-  if (!zipFileName) {
-     throw new ZipNotFoundError("No zip file found.");
-    return [];
-  }
+  if (!zipFileName) throw new ZipNotFoundError("No zip file found.");
 
   const unzipFolderPath = path.join(
     process.cwd(),
     zipFileName.replace(".zip", "")
   );
-
 
   const extractZip = (zipFileName: string, unzipFolderPath: string): void => {
     const zip = new AdmZip(zipFileName);
@@ -34,53 +32,85 @@ const extractAndProcessZip = async (zipFileName: string): Promise<CompilationRes
     actualFilePath: string,
     unzipFolderPath: string
   ): Promise<CompilationResult[]> => {
-    const javaFiles = fs
+    const files = fs
       .readdirSync(path.join(unzipFolderPath, actualFilePath))
-      .filter((file) => file.endsWith(".java"));
+      .filter(
+        (file) =>
+          file.endsWith(".java") || file.endsWith(".js") || file.endsWith(".py")
+      );
     const compilationResults: CompilationResult[] = [];
 
-    for (const javaFile of javaFiles) {
-      const javaFilePath = path.join(unzipFolderPath, actualFilePath, javaFile);
-      const className = javaFile.replace(".java", "");
+    for (const file of files) {
+      const filePath = path.join(unzipFolderPath, actualFilePath, file);
+
       const compilationResult: CompilationResult = {
-        fileName: javaFile,
+        fileName: file,
         output: "",
       };
-
-      const compileCommand = `javac ${javaFilePath}`;
-      const runCommand = `java -classpath ${path.join(
-        unzipFolderPath,
-        actualFilePath
-      )} ${className}`;
-
-      try {
-        const { stdout: compileOutput, stderr: compileError } = await execAsync(
-          compileCommand
-        );
-
-        if (compileError) {
-           throw new CompilationError(`Error: ${compileError}`);
-        }
-
-        if (!compileError) {
+      if (file.endsWith(".js")) {
+        const runCommand = `node ${filePath}`;
+        try {
           const { stdout: runOutput, stderr: runError } = await execAsync(
             runCommand
           );
-
           if (runError) {
-           throw new CompilationError(`Error: ${runError}`);
+            throw new CompilationError(`Error: ${runError}`);
           } else {
-            compilationResult.output = `Output of ${javaFile}:\n${runOutput.replace(
-              /\r\n/g,
-              ""
-            )}`;
+            compilationResult.output = `Output of ${file}:\n${runOutput}`;
           }
+        } catch (error) {
+          throw new CompilationError("An error occurred during compilation.");
         }
-      } catch (error) {
-        throw new CompilationError("An error occurred during compilation.");
-      }
+        compilationResults.push(compilationResult);
+      } else if (file.endsWith(".py")) {
+        const runCommand = `python ${filePath}`;
+        try {
+          const { stdout: runOutput, stderr: runError } = await execAsync(
+            runCommand
+          );
+          if (runError) {
+            throw new CompilationError(`Error: ${runError}`);
+          } else {
+            compilationResult.output = `Output of ${file}:\n${runOutput}`;
+          }
+        } catch (error) {
+          throw new CompilationError("An error occurred during compilation.");
+        }
+        compilationResults.push(compilationResult);
+      } else if (file.endsWith(".java")) {
+        const className = file.replace(".java", "");
 
-      compilationResults.push(compilationResult);
+        const compileCommand = `javac ${filePath}`;
+        const runCommand = `java -classpath ${path.join(
+          unzipFolderPath,
+          actualFilePath
+        )} ${className}`;
+
+        try {
+          const { stdout: compileOutput, stderr: compileError } =
+            await execAsync(compileCommand);
+
+          if (compileError) {
+            throw new CompilationError(`Error: ${compileError}`);
+          }
+
+          if (!compileError) {
+            const { stdout: runOutput, stderr: runError } = await execAsync(
+              runCommand
+            );
+
+            if (runError) {
+              throw new CompilationError(`Error: ${runError}`);
+            } else {
+              compilationResult.output = `Output of ${file}:\n${runOutput}`;
+            }
+          }
+        } catch (error) {
+          throw new CompilationError("An error occurred during compilation.");
+        }
+
+        compilationResults.push(compilationResult);
+      }
     }
 
     return compilationResults;
