@@ -1,0 +1,24 @@
+{
+  "name": "zipouter",
+  "version": "1.0.0",
+  "description": "This is the npm package of zipouter.",
+  "main": "dist/index.js",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npx rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/adm-zip": "^0.5.5",
+    "@types/node": "^20.11.25",
+    "adm-zip": "^0.5.10",
+    "rollup": "^4.12.1",
+    "rollup-plugin-polyfill-node": "^0.13.0",
+    "tslib": "^2.6.2"
+  }
+}
