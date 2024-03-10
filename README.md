@@ -14,22 +14,23 @@ npm install zipouter
 ## Usage
 
 ```javascript
-const { extractAndProcessZip } = require('zipouter');
-                        or
+const { extractAndProcessZip } = require("zipouter");
+or;
 import { extractAndProcessZip } from "zipouter";
 
-const zipFileName = 'your-zip-file.zip';
+const zipFileName = "your-zip-file.zip";
 
 extractAndProcessZip(zipFileName)
   .then((results) => {
-    console.log('Compilation Results:', results);
+    console.log("Compilation Results:", results);
   })
   .catch((error) => {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
   });
 ```
 
 ## Important
+
 Before proceeding further, ensure that you have Java, Node.js, and Python installed on your local machine. You can download and install them from the official websites:
 
 - [Java](https://www.oracle.com/java/technologies/javase-downloads.html)
@@ -65,9 +66,11 @@ Returns a promise that resolves to an array of `CompilationResult` objects.
 ## Example
 
 # 0.First upload your zip file in the current directory <br/>
+
 ![image](https://github.com/TheCoderAdi/zipouter/assets/111285422/ff3118b7-9614-490c-b0ca-3aeb40dc6ea9)
 
 # 1.import and use the extractAndProcessZip from zipouter
+
 ```javascript
 import { extractAndProcessZip } from "zipouter";
 
@@ -82,16 +85,13 @@ extractAndProcessZip(zipFileName)
 ```
 
 # 2.Output<br/>
+
 ![image](https://github.com/TheCoderAdi/zipouter/assets/111285422/e322047e-5e68-4a86-a79a-19c5ce196cb9)
-
-
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Issues
-If you encounter any issues or have suggestions, please [open an issue on GitHub](https://github.com/TheCoderAdi/zipouter/issues).
 
-## Keywords
-npm, zip, extract, process, compilation, java, javascript, python, programming languages
+If you encounter any issues or have suggestions, please [open an issue on GitHub](https://github.com/TheCoderAdi/zipouter/issues).
