@@ -1,6 +1,6 @@
-# zipouter
+# zip-outer
 
-[![npm version](https://img.shields.io/npm/v/zipouter.svg)](https://www.npmjs.com/package/zipouter)
+[![npm version](https://img.shields.io/npm/v/zip-outer.svg)](https://www.npmjs.com/package/zip-outer)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A simple npm package to extract and process the contents of a zip file.
@@ -8,15 +8,15 @@ A simple npm package to extract and process the contents of a zip file.
 ## Installation
 
 ```bash
-npm install zipouter
+npm install zip-outer
 ```
 
 ## Usage
 
 ```javascript
-const { extractAndProcessZip } = require("zipouter");
+const { extractAndProcessZip } = require("zip-outer");
 or;
-import { extractAndProcessZip } from "zipouter";
+import { extractAndProcessZip } from "zip-outer";
 
 const zipFileName = "your-zip-file.zip";
 
@@ -72,7 +72,7 @@ Returns a promise that resolves to an array of `CompilationResult` objects.
 # 1.import and use the extractAndProcessZip from zipouter
 
 ```javascript
-import { extractAndProcessZip } from "zipouter";
+import { extractAndProcessZip } from "zip-outer";
 
 const zipFileName = "example.zip";
 extractAndProcessZip(zipFileName)
