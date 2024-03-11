@@ -69,7 +69,7 @@ Returns a promise that resolves to an array of `CompilationResult` objects.
 
 ![image](https://github.com/TheCoderAdi/zipouter/assets/111285422/ff3118b7-9614-490c-b0ca-3aeb40dc6ea9)
 
-# 1.import and use the extractAndProcessZip from zipouter
+# 1.import and use the extractAndProcessZip from zip-outer
 
 ```javascript
 import { extractAndProcessZip } from "zip-outer";

@@ -7,7 +7,7 @@ export default defineConfig({
     {
       dir: "dist",
       format: "module",
-      name: "zipouter",
+      name: "zip-outer",
     },
   ],
   external: ["adm-zip", "fs", "path", "child_process", "util"],
