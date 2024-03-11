@@ -1,5 +1,5 @@
 {
-  "name": "zip-outer",
+  "name": "zipouter",
   "version": "1.0.0",
   "description": "A simple npm package to extract and process the contents of a zip file, supporting multiple programming languages including Java, JavaScript, Python, and more.",
   "main": "dist/index.js",
