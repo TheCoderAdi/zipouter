@@ -11,6 +11,12 @@ A simple npm package to extract and process the contents of a zip file.
 npm install zipouter
 ```
 
+## Additional Package to Install
+
+```bash
+npm install adm-zip
+```
+
 ## Usage
 
 ```javascript
